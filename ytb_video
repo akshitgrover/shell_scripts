@@ -3,18 +3,36 @@
 #
 if which youtube-dl
 then
+#
 echo "Downloader Exists!"
+#
 else
+#
 apt-get update
 apt-get install youtube-dl
+#
 fi
 #
 #
 link=$(strings ~/.config/google-chrome/Default/Current\ Session | grep youtube.*watch?v | uniq -d | tail -1)
 #
 #
+if [ $link ]
+then
+#
+if [ $1 ]
+then
+#
+cd $1
+#
+fi
 echo "Downloading: $link"
-#
-#
 youtube-dl $link
+#
+else
+#
+echo "No video tab open"
+#
+fi
+#
 
